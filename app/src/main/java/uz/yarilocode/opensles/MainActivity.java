@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 	private SwipeRefreshLayout swipeRefreshLayout;
 	private RecyclerViewAdapter adapter;
 
-	private IMediaPlayerFactory mFactory;
+	private IMediaPlayerFactory factory;
 	private IBasicMediaPlayer[] players = new IBasicMediaPlayer[2];
 	private int currentPlayer = -1;
 
@@ -56,13 +56,18 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void initPlayers() {
-		mFactory = new OpenSLMediaPlayerFactory(this);
+		factory = new OpenSLMediaPlayerFactory(this);
 
 		for (int i = 0; i < players.length; i++) {
-			IBasicMediaPlayer player = mFactory.createMediaPlayer();
+			IBasicMediaPlayer player = factory.createMediaPlayer();
 
 //			player.setOnBufferingUpdateListener(mOnBufferingUpdateListener);
-//			player.setOnCompletionListener(mOnCompletionListener);
+			player.setOnCompletionListener(new IBasicMediaPlayer.OnCompletionListener() {
+				@Override
+				public void onCompletion(IBasicMediaPlayer mp) {
+					adapter.selectNext();
+				}
+			});
 //			player.setOnErrorListener(mOnErrorListener);
 //			player.setOnInfoListener(mOnInfoListener);
 //			player.setOnPreparedListener(mOnPreparedListener);

@@ -34,6 +34,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 		notifyDataSetChanged();
 	}
 
+	public void selectNext() {
+		int lastItem = selectedItem;
+
+		selectedItem++;
+		if (selectedItem > songs.size() - 1)
+			selectedItem = 0;
+
+		notifyItemChanged(selectedItem);
+		notifyItemChanged(lastItem);
+
+		if (onClickListener != null)
+			onClickListener.onClick(null);
+	}
+
 	public void setOnItemClickListener(View.OnClickListener listener) {
 		onClickListener = listener;
 	}
@@ -83,8 +97,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 				@Override
 				public void onClick(View view) {
-					notifyItemChanged(selectedItem);
+					int lastItem = selectedItem;
 					selectedItem = position;
+					notifyItemChanged(lastItem);
 
 					container.setBackgroundColor(
 							ContextCompat.getColor(context, R.color.colorHighlight));
