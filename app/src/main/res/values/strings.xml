@@ -1,0 +1,11 @@
+<resources>
+	<string name="app_name">OpenSL ES</string>
+
+	<string name="play">Play</string>
+	<string name="ndk_sound_pool">OpenSL (Android 2.3)</string>
+	<string name="play_rnd">Play random sound</string>
+	<string name="play_rnd_loop">Play a loop of random sounds</string>
+	<string name="android_soundpool">Android Soundpool</string>
+	<string name="title_player_controls">Player controls</string>
+	<string name="title_sound_implementation">Sound implementation</string>
+</resources>
